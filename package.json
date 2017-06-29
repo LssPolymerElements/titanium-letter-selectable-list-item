@@ -1,0 +1,11 @@
+{
+  "name": "titanium-letter-selectable-list-item",
+  "version": "1.0.0",
+  "description": "",
+  "main": "titanium-letter-selectable-list-item.html",
+  "dependencies": {},
+  "devDependencies": {
+    "browser-sync": "^2.18.2",
+    "gulp": "^3.9.1"
+  }
+}

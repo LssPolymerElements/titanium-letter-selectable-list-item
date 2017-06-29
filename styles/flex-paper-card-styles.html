@@ -1,0 +1,23 @@
+<link rel="import" href="../../iron-flex-layout/iron-flex-layout.html">
+<dom-module id="flex-paper-card-styles">
+    <template>
+        <style>
+            paper-card[flex] {
+                --paper-card-header: {
+                    @apply --layout-horizontal;
+                }
+                --paper-card-content: {
+                    @apply --layout-flex-auto;
+                }
+                --paper-card-actions: {
+                    @apply --layout-horizontal;
+                    @apply --layout-end-justified;
+                }
+                --paper-card: {
+                    min-width: 0;
+                    @apply --layout-vertical;
+                }
+            }
+        </style>
+    </template>
+</dom-module>

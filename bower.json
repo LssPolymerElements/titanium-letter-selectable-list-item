@@ -1,0 +1,40 @@
+{
+  "name": "titanium-letter-selectable-list-item",
+  "main": "titanium-letter-selectable-list-item.html",
+  "version": "1.0.0",
+  "authors": [
+    "Leavitt Software Solutions"
+  ],
+  "keywords": [
+    "polymer 2",
+    "leavitt software",
+    "lss"
+  ],
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "package.json",
+    "tsconfig.json",
+    ".gitignore",
+    ".vscode"
+  ],
+  "description": "`titanium-letter-selectable-list-item` given data, displays a selectable list item with a titanium-circle-letter-icon. Polymer 2",
+  "license": "MIT",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0",
+    "polymer2-ts": "^1.0.0",
+    "paper-card": "PolymerElements/paper-card#^2.0.0",
+    "paper-checkbox": "PolymerElements/paper-checkbox#^2.0.0",
+    "iron-icon": "PolymerElements/iron-icon#^2.0.0",
+    "iron-icons": "PolymerElements/iron-icons#^2.0.0",
+    "titanium-circle-letter-icon": "^2.0.0",
+    "neon-animation": "PolymerElements/neon-animation#^2.0.1",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#^2.0.0",
+    "web-animations-js": "web-animations/web-animations-js#^2.2.5"
+  },
+  "devDependencies": {
+    "lss-iron-demo-helpers": "LssPolymerElements/iron-demo-helpers#^2.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  }
+}
