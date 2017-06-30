@@ -8,50 +8,17 @@
 
   <title>Titanium Circle Letter Icon Demo</title>
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-
   <link rel="import" href="../../polymer/polymer.html">
   <link rel="import" href="../../polymer2-ts/polymer2-ts.html">
   <link rel="import" href="../../lss-iron-demo-helpers/demo-pages-shared-styles.html">
   <link rel="import" href="../../lss-iron-demo-helpers/demo-snippet.html">
-  <link rel="import" href="../../iron-ajax/iron-ajax.html">
-
-  <link rel="import" href="../titanium-letter-selectable-list-item.html">
-
+  <link rel="import" href="./x-demo.html">
   <custom-style>
     <style is="custom-style" include="demo-pages-shared-styles">
 
     </style>
   </custom-style>
-
 </head>
-
-
-<dom-module id="x-demo">
-  <template>
-    <h3>titanium-letter-selectable-list-item </h3>
-    <demo-snippet>
-      <code>
-        <titanium-letter-selectable-list-item sub-heading="SubHeading"  heading="Heading">
-            <div slot="right">
-              Right Slot 
-            </div>
-             <div slot="bottom">
-             bottom slot
-            </div>
-        </titanium-letter-selectable-list-item>
-      </code>
-    </demo-snippet>
-  </template>
-
-  <script>
-    class XDemo extends Polymer.Element {
-      static get is() {
-        return 'x-demo';
-      }
-    }
-    customElements.define(XDemo.is, XDemo);
-  </script>
-</dom-module>
 
 <body>
   <div class="vertical-section-container centered">

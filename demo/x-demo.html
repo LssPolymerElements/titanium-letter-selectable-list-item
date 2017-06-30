@@ -1,0 +1,45 @@
+<link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../../polymer2-ts/polymer2-ts.html">
+<link rel="import" href="../../lss-iron-demo-helpers/demo-pages-shared-styles.html">
+<link rel="import" href="../../lss-iron-demo-helpers/demo-snippet.html">
+<link rel="import" href="../../iron-list/iron-list.html">
+<link rel="import" href="../../iron-ajax/iron-ajax.html">
+<link rel="import" href="../titanium-letter-selectable-list-item.html">
+
+<dom-module id="x-demo">
+    <template>
+
+        <h3>titanium-letter-selectable-list-item </h3>
+        <demo-snippet>
+            <iron-ajax url="data.json" last-response="{{data}}" auto></iron-ajax>
+            <iron-list id="list" selected-items="{{selectedItems}}" items="{{data}}" as="item" multi-selection selection-enabled>
+                <template>
+                    <titanium-letter-selectable-list-item sub-heading="SubHeading" heading="[[item.heading]]" selected="[[selected]]" item="[[item]]">
+                        <div slot="right">
+                            Right Slot
+                        </div>
+                        <div slot="bottom">
+                            bottom slot
+                        </div>
+                    </titanium-letter-selectable-list-item>
+                </template>
+            </iron-list>
+        </demo-snippet>
+    </template>
+
+    <script>
+        class XDemo extends Polymer.Element {
+            static get is() {
+                return 'x-demo';
+            }
+            ready() {
+                super.ready();
+                window.addEventListener('item-selected', (e) => this.itemSelected(e));
+            }
+            itemSelected(e) {
+                this.$.list.toggleSelectionForItem(e.detail);
+            }
+        }
+        customElements.define(XDemo.is, XDemo);
+    </script>
+</dom-module>

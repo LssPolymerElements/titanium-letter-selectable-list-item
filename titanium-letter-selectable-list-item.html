@@ -102,7 +102,7 @@ Example:
 
         <paper-card flex id="card" selected$="[[selected]]" elevation="1" tabIndex="1">
             <div class="card-content">
-                <neon-animated-pages id="icon-button" selected="{{page}}" attr-for-selected="name" sticky entry-animation="fade-in-animation"
+                <neon-animated-pages id="icon-button" selected="[[page]]" attr-for-selected="name" sticky entry-animation="fade-in-animation"
                     exit-animation="fade-out-animation">
                     <titanium-circle-letter-icon id="circleIcon" name="picture" text="[[heading]]" size="40"></titanium-circle-letter-icon>
                     <paper-checkbox name="checkbox" checked="{{selected}}"></paper-checkbox>

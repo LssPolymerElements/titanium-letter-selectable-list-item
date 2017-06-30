@@ -3,8 +3,8 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
     @property()
     item: any;
 
-    @property({ reflectToAttribute: true, notify: true })
-    selected: boolean;
+    @property({ notify: true })
+    selected: boolean = false;
 
     @property()
     heading: string;
@@ -26,38 +26,38 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
 
     ready() {
         super.ready();
-        Polymer.Gestures.addListener(this, 'tap', (e: any) => this.tapHandler(e));
     }
 
-    @listen("tap", "card")
+    @gestureListen("tap", "card")
     onCardTap(e: any) {
         console.log("Tapped");
         this.dispatchEvent(new CustomEvent('card-tap', e));
     }
 
+    // @listen("mouseover", "icon-button")
+    // onHovered() {
+    //     console.log("hovered called")
+    //     this.page = "checkbox";
+    // }
+    // @listen("mouseout", "icon-button")
+    // onUnhovered() {
+    //     console.log("unhovered called")
+    //     this.page = this.selected ? "checkbox" : "picture";
+    // }
 
-    onHovered() {
-        console.log("hovered called")
-        this.page = "checkbox";
-    }
-
-    onUnhovered() {
-        console.log("unhovered called")
-        this.page = this.selected ? "checkbox" : "picture";
-    }
-
-    @listen("tap", "icon-button")
+    @gestureListen("tap", "icon-button")
     toggleSelected(e: any) {
-        console.log("tap called")
-        let options: any = { bubbles: true, composed: true };
-        this.dispatchEvent(new CustomEvent(`${this.item}item-selected`, options));
         e.stopPropagation();
+        console.log("tap called")
+        let options: any = { bubbles: true, composed: true, detail: this.item };
+        this.dispatchEvent(new CustomEvent("item-selected", options));
     }
 
     @observe('selected')
-    private selectedChanged(selected: boolean) {
+    private selectedChanged(value: any) {
         console.log("selectedchanged called")
-        this.page = selected ? "checkbox" : "picture";
+        this.page = this.selected ? "checkbox" : "picture";
+        console.log(this.selected + "--selected--ts");
     }
 
     @observe('searchTokens, heading')
