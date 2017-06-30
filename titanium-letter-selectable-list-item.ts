@@ -24,41 +24,22 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
     @property()
     searchTokens: Array<string> = []
 
-    ready() {
-        super.ready();
-    }
-
     @gestureListen("tap", "card")
     onCardTap(e: any) {
-        console.log("Tapped");
         let options: any = { bubbles: true, composed: true, detail: e };
         this.dispatchEvent(new CustomEvent('card-tap', options));
     }
 
-    // @listen("mouseover", "icon-button")
-    // onHovered() {
-    //     console.log("hovered called")
-    //     this.page = "checkbox";
-    // }
-    // @listen("mouseout", "icon-button")
-    // onUnhovered() {
-    //     console.log("unhovered called")
-    //     this.page = this.selected ? "checkbox" : "picture";
-    // }
-
     @gestureListen("tap", "icon-button")
     toggleSelected(e: any) {
         e.stopPropagation();
-        console.log("tap called")
         let options: any = { bubbles: true, composed: true, detail: this.item };
         this.dispatchEvent(new CustomEvent("item-selected", options));
     }
 
     @observe('selected')
     private selectedChanged(value: any) {
-        console.log("selectedchanged called")
         this.page = this.selected ? "checkbox" : "picture";
-        console.log(this.selected + "--selected--ts");
     }
 
     @observe('searchTokens, heading')
