@@ -1,0 +1,124 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer2-ts/polymer2-ts.html">
+<link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../titanium-circle-letter-icon/titanium-circle-letter-icon.html">
+<link rel="import" href="../neon-animation/neon-animated-pages.html">
+<link rel="import" href="../neon-animation/animations/fade-in-animation.html">
+<link rel="import" href="../neon-animation/animations/fade-out-animation.html">
+<link rel="import" href="./styles/flex-paper-card-styles.html">
+<link rel="import" href="../polymer/lib/mixins/gesture-event-listeners.html">
+
+<!--
+A Polymer element to display a list item with a selectable letter icon in a paper card.
+
+Example:
+
+    <titanium-letter-selectable-list-item id="listItem" item="[[item]]" search-tokens="[[searchTokens]]" ended$="[[item.IsGameOver]]"
+            sub-heading="[[subheading(item)]]" heading="[[item.Name]]" selected$="[[selected]]">
+            <div slot="right">
+               Right TEXT
+            </div>
+             <div slot="bottom">
+                Bottom TEXT
+            </div>
+        </titanium-letter-selectable-list-item>
+
+-->
+
+<dom-module id="titanium-letter-selectable-list-item">
+
+    <template>
+
+        <style include="flex-paper-card-styles">
+            paper-card {
+                cursor: pointer;
+                margin: 8px;
+                @apply --paper-card;
+                --paper-card-content: {
+                    @apply --layout-horizontal;
+                    padding: 8px;
+                }
+            }
+
+            paper-card:focus {
+                outline-width: 0;
+            }
+
+            neon-animated-pages {
+                margin: 8px;
+                height: 40px;
+                width: 40px;
+                @apply --layout-vertical;
+                @apply --layout-center;
+                @apply --layout-center-center;
+            }
+
+            neon-animated-pages paper-checkbox {
+                position: relative !important;
+                --paper-checkbox-label-spacing: 0px;
+            }
+
+            neon-animated-pages iron-icon {
+                height: 40px;
+                width: 40px;
+            }
+
+            .main-text-container {
+                padding: 8px;
+                min-width: 100px;
+                @apply --layout-vertical;
+                @apply --layout-flex-2;
+                @apply --item-text-container;
+            }
+
+            heading {
+                display: block;
+                @apply --paper-font-common-nowrap;
+                font-size: 24px;
+                font-weight: 400;
+                min-width: 0;
+
+                @apply --item-heading;
+            }
+
+            sub-heading {
+                display: block;
+                @apply --paper-font-caption;
+                color: var(--paper-grey-500);
+                @apply --paper-font-common-nowrap;
+                min-width: 0;
+
+                @apply --item-sub-heading;
+            }
+
+            span[highlighted] {
+                background-color: yellow
+            }
+
+            paper-card[selected] {
+                background-color: #EDF4FD;
+            }
+        </style>
+
+        <paper-card flex id="card" selected$="[[selected]]" elevation="1" tabIndex="1">
+            <div class="card-content">
+                <neon-animated-pages id="icon-button" selected="[[page]]" attr-for-selected="name" sticky entry-animation="fade-in-animation"
+                    exit-animation="fade-out-animation">
+                    <titanium-circle-letter-icon id="circleIcon" name="picture" text="[[heading]]" size="40"></titanium-circle-letter-icon>
+                    <paper-checkbox name="checkbox" checked="{{selected}}"></paper-checkbox>
+                </neon-animated-pages>
+                <div class="main-text-container">
+                    <heading>
+                        <template is="dom-repeat" items="[[headingTokens]]"><span highlighted$="[[isHighlighted(item)]]">[[item]]</span></template>
+                    </heading>
+                    <sub-heading> [[subHeading]] </sub-heading>
+                    <slot name="bottom"></slot>
+                </div>
+                <slot name="right"></slot>
+            </div>
+        </paper-card>
+
+    </template>
+    <script src="titanium-letter-selectable-list-item.js"></script>
+</dom-module>
