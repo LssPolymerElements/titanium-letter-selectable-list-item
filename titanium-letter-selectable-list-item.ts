@@ -31,7 +31,8 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
     @gestureListen("tap", "card")
     onCardTap(e: any) {
         console.log("Tapped");
-        this.dispatchEvent(new CustomEvent('card-tap', e));
+        let options: any = { bubbles: true, composed: true, detail: e };
+        this.dispatchEvent(new CustomEvent('card-tap', options));
     }
 
     // @listen("mouseover", "icon-button")

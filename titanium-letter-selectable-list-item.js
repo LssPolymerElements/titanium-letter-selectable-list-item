@@ -20,7 +20,8 @@ let LetterSelectableListItem = class LetterSelectableListItem extends Polymer.Ge
     }
     onCardTap(e) {
         console.log("Tapped");
-        this.dispatchEvent(new CustomEvent('card-tap', e));
+        let options = { bubbles: true, composed: true, detail: e };
+        this.dispatchEvent(new CustomEvent('card-tap', options));
     }
     // @listen("mouseover", "icon-button")
     // onHovered() {
