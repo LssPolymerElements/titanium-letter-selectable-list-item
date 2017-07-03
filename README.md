@@ -1,21 +1,23 @@
-# \<titanium-letter-selectable-list-item\>
+# titanium-letter-selectable-list-item
 
+To install use: `bower install --save titanium-letter-selectable-list-item`
 
+[ LIVE DEMO AND API ](https://www.webcomponents.org/element/LssPolymerElements/titanium-letter-selectable-list-item)
 
-## Install the Polymer-CLI
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/LssPolymerElements/titanium-letter-selectable-list-item)
 
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your element locally.
-
-## Viewing Your Element
+<!---
+```
+<custom-element-demo>
+  <template is="dom-bind">
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="demo/index.html">
+    <x-demo></x-demo>
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+```html
 
 ```
-$ polymer serve
-```
-
-## Running Tests
-
-```
-$ polymer test
-```
-
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.

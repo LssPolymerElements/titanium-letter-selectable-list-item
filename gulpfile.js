@@ -27,7 +27,7 @@ gulp.task('polymerServe', function (done) {
 gulp.task('browser-sync', function () {
   browserSync.init({
     proxy: "localhost:502",
-    files: '*.html, *.js, images/*, demo/*.html, demo/*.js'
+    startPath: '/components/titanium-letter-selectable-list-item/demo/index.html',
   });
 });
 

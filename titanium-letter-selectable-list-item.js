@@ -15,34 +15,17 @@ let LetterSelectableListItem = class LetterSelectableListItem extends Polymer.Ge
         this.page = "picture";
         this.searchTokens = [];
     }
-    ready() {
-        super.ready();
-    }
     onCardTap(e) {
-        console.log("Tapped");
         let options = { bubbles: true, composed: true, detail: e };
         this.dispatchEvent(new CustomEvent('card-tap', options));
     }
-    // @listen("mouseover", "icon-button")
-    // onHovered() {
-    //     console.log("hovered called")
-    //     this.page = "checkbox";
-    // }
-    // @listen("mouseout", "icon-button")
-    // onUnhovered() {
-    //     console.log("unhovered called")
-    //     this.page = this.selected ? "checkbox" : "picture";
-    // }
     toggleSelected(e) {
         e.stopPropagation();
-        console.log("tap called");
         let options = { bubbles: true, composed: true, detail: this.item };
         this.dispatchEvent(new CustomEvent("item-selected", options));
     }
     selectedChanged(value) {
-        console.log("selectedchanged called");
         this.page = this.selected ? "checkbox" : "picture";
-        console.log(this.selected + "--selected--ts");
     }
     headingChanged(searchTokens, heading) {
         if (searchTokens && searchTokens.length > 0 && typeof heading !== 'undefined') {
