@@ -22,6 +22,12 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
     list: Object;
 
     @property()
+    isSelectable: Boolean;
+
+    @property()
+    cursor: string = "pointer";
+
+    @property()
     searchTokens: Array<string> = []
 
     @gestureListen("tap", "card")
@@ -40,6 +46,11 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
     @observe('selected')
     private selectedChanged(value: any) {
         this.page = this.selected ? "checkbox" : "picture";
+    }
+
+    @computed("iconComputedStyle")
+    private iconSelectable(isSelectable: boolean) {
+        return isSelectable ? " cursor: pointer" : "";
     }
 
     @observe('searchTokens, heading')

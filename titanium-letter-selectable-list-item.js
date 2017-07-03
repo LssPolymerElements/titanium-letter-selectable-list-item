@@ -13,6 +13,7 @@ let LetterSelectableListItem = class LetterSelectableListItem extends Polymer.Ge
         this.selected = false;
         this.headingTokens = [];
         this.page = "picture";
+        this.cursor = "pointer";
         this.searchTokens = [];
     }
     onCardTap(e) {
@@ -26,6 +27,9 @@ let LetterSelectableListItem = class LetterSelectableListItem extends Polymer.Ge
     }
     selectedChanged(value) {
         this.page = this.selected ? "checkbox" : "picture";
+    }
+    iconSelectable(isSelectable) {
+        return isSelectable ? " cursor: pointer" : "";
     }
     headingChanged(searchTokens, heading) {
         if (searchTokens && searchTokens.length > 0 && typeof heading !== 'undefined') {
@@ -71,6 +75,14 @@ __decorate([
 ], LetterSelectableListItem.prototype, "list", void 0);
 __decorate([
     property(),
+    __metadata("design:type", Boolean)
+], LetterSelectableListItem.prototype, "isSelectable", void 0);
+__decorate([
+    property(),
+    __metadata("design:type", String)
+], LetterSelectableListItem.prototype, "cursor", void 0);
+__decorate([
+    property(),
     __metadata("design:type", Array)
 ], LetterSelectableListItem.prototype, "searchTokens", void 0);
 __decorate([
@@ -91,6 +103,12 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], LetterSelectableListItem.prototype, "selectedChanged", null);
+__decorate([
+    computed("iconComputedStyle"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Boolean]),
+    __metadata("design:returntype", void 0)
+], LetterSelectableListItem.prototype, "iconSelectable", null);
 __decorate([
     observe('searchTokens, heading'),
     __metadata("design:type", Function),
