@@ -32,7 +32,6 @@ Example:
 
         <style include="flex-paper-card-styles">
             paper-card {
-                cursor: pointer;
                 margin: 8px;
                 @apply --paper-card;
                 --paper-card-content: {
@@ -105,7 +104,7 @@ Example:
             <div class="card-content">
                 <neon-animated-pages id="icon-button" selected="[[page]]" attr-for-selected="name" sticky entry-animation="fade-in-animation"
                     exit-animation="fade-out-animation">
-                    <titanium-circle-letter-icon name="picture" text="[[heading]]" size="40"></titanium-circle-letter-icon>
+                    <titanium-circle-letter-icon name="picture" text="[[heading]]" size="40" style$="[[iconComputedStyle]]"></titanium-circle-letter-icon>
                     <paper-checkbox name="checkbox" checked="{{selected}}"></paper-checkbox>
                 </neon-animated-pages>
                 <div class="main-text-container">

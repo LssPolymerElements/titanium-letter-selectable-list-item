@@ -11,6 +11,20 @@
         <iron-ajax url="data.json" last-response="{{data}}" auto></iron-ajax>
         <iron-list id="list" selected-items="{{selectedItems}}" items="{{data}}" as="item" multi-selection selection-enabled>
             <template>
+                <titanium-letter-selectable-list-item sub-heading="SubHeading" heading="[[item.heading]]" selected="[[selected]]" item="[[item]]"
+                    is-selectable="true">
+                    <div slot="right">
+                        right slot
+                    </div>
+                    <div slot="bottom">
+                        bottom slot
+                    </div>
+                </titanium-letter-selectable-list-item>
+            </template>
+        </iron-list>
+        <h3>titanium-letter-selectable-list-item no select</h3>
+        <iron-list items="{{data}}" as="item">
+            <template>
                 <titanium-letter-selectable-list-item sub-heading="SubHeading" heading="[[item.heading]]" selected="[[selected]]" item="[[item]]">
                     <div slot="right">
                         right slot
