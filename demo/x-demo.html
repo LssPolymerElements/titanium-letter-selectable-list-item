@@ -8,7 +8,7 @@
 <dom-module id="x-demo">
     <template>
         <h3>titanium-letter-selectable-list-item </h3>
-        <iron-ajax url="data.json" last-response="{{data}}" auto></iron-ajax>
+        <iron-ajax url="./data.json" last-response="{{data}}" auto></iron-ajax>
         <iron-list id="list" selected-items="{{selectedItems}}" items="{{data}}" as="item" multi-selection selection-enabled>
             <template>
                 <titanium-letter-selectable-list-item sub-heading="SubHeading" heading="[[item.heading]]" selected="[[selected]]" item="[[item]]"
