@@ -57,17 +57,19 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
     headingChanged(searchTokens: any, heading: string) {
         if (searchTokens && searchTokens.length > 0 && typeof heading !== 'undefined') {
 
-            var regEx = new RegExp(`(${searchTokens.join(")|(")})`, 'i');
-            this.headingTokens = heading.split(regEx).filter(o => typeof o !== "undefined" && o !== "");
-            return
+            var regExPart = searchTokens.map((token: string) => {
+                return token.split('').join("[^string]*?")
+            }).join("|");
+            var regEx = new RegExp(regExPart, 'gi');
+            var wordsToHighlight = heading.match(regEx) || [];
+
+            var highlightedHeading = heading;
+            wordsToHighlight.forEach((word: string) => {
+                highlightedHeading = highlightedHeading.replace(word, `<span highlighted>${word}</span>`)
+            });
+
+            this.$.heading.innerHTML = highlightedHeading;
         }
-        this.headingTokens = [heading];
-    }
-
-    private isHighlighted(heading: string) {
-        if (typeof heading != "string")
-            return "";
-
-        return this.searchTokens.some(o => o.toUpperCase() == heading.toUpperCase());
+        this.$.heading.innerHtml = [heading];
     }
 }

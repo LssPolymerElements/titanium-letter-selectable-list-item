@@ -108,9 +108,7 @@ Example:
                     <paper-checkbox name="checkbox" checked="{{selected}}"></paper-checkbox>
                 </neon-animated-pages>
                 <div class="main-text-container">
-                    <heading>
-                        <template is="dom-repeat" items="[[headingTokens]]"><span highlighted$="[[isHighlighted(item)]]">[[item]]</span></template>
-                    </heading>
+                    <heading id="heading"></heading>
                     <sub-heading> [[subHeading]] </sub-heading>
                     <slot name="bottom"></slot>
                 </div>
