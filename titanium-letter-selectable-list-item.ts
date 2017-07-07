@@ -53,23 +53,34 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
         return isSelectable ? " cursor: pointer" : "";
     }
 
+    regExpEscape(s: string) {
+        return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    };
+
     @observe('searchTokens, heading')
     headingChanged(searchTokens: any, heading: string) {
         if (searchTokens && searchTokens.length > 0 && typeof heading !== 'undefined') {
 
             var regExPart = searchTokens.map((token: string) => {
-                return token.split('').join("[^string]*?")
+                return token.split('').map(o => this.regExpEscape(o)).join("[^string]*?")
             }).join("|");
             var regEx = new RegExp(regExPart, 'gi');
             var wordsToHighlight = heading.match(regEx) || [];
 
             var highlightedHeading = heading;
-            wordsToHighlight.forEach((word: string) => {
-                highlightedHeading = highlightedHeading.replace(word, `<span highlighted>${word}</span>`)
+            this.unique(wordsToHighlight).forEach((word: string) => {
+                var replaceRegEx = new RegExp(`(?!<span[^>]*?>)(${this.regExpEscape(word)})(?![^<]*?<\/span>)`, 'gi');
+                highlightedHeading = highlightedHeading.replace(replaceRegEx, `<span highlighted>${word}</span>`);
             });
 
             this.$.heading.innerHTML = highlightedHeading;
         }
         this.$.heading.innerHtml = [heading];
+    }
+
+    private unique(a: Array<string>) {
+        return a.filter(function (elem, pos) {
+            return a.toString().toLowerCase().indexOf(elem.toLowerCase()) == pos;
+        });
     }
 }
