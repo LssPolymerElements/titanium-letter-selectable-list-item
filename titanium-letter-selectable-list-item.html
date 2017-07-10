@@ -32,9 +32,8 @@ Example:
 
         <style include="flex-paper-card-styles">
             paper-card {
-                cursor: pointer;
                 margin: 8px;
-                @apply --paper-card;
+                @apply --titanium-letter-selectable-list-item-paper-card;
                 --paper-card-content: {
                     @apply --layout-horizontal;
                     padding: 8px;
@@ -79,7 +78,7 @@ Example:
                 font-weight: 400;
                 min-width: 0;
 
-                @apply --item-heading;
+                @apply --titanium-letter-selectable-list-item-heading;
             }
 
             sub-heading {
@@ -89,7 +88,7 @@ Example:
                 @apply --paper-font-common-nowrap;
                 min-width: 0;
 
-                @apply --item-sub-heading;
+                @apply --titanium-letter-selectable-list-item-sub-heading;
             }
 
             span[highlighted] {
@@ -105,13 +104,11 @@ Example:
             <div class="card-content">
                 <neon-animated-pages id="icon-button" selected="[[page]]" attr-for-selected="name" sticky entry-animation="fade-in-animation"
                     exit-animation="fade-out-animation">
-                    <titanium-circle-letter-icon name="picture" text="[[heading]]" size="40"></titanium-circle-letter-icon>
+                    <titanium-circle-letter-icon name="picture" text="[[heading]]" size="40" style$="[[iconComputedStyle]]"></titanium-circle-letter-icon>
                     <paper-checkbox name="checkbox" checked="{{selected}}"></paper-checkbox>
                 </neon-animated-pages>
                 <div class="main-text-container">
-                    <heading>
-                        <template is="dom-repeat" items="[[headingTokens]]"><span highlighted$="[[isHighlighted(item)]]">[[item]]</span></template>
-                    </heading>
+                    <heading id="heading"></heading>
                     <sub-heading> [[subHeading]] </sub-heading>
                     <slot name="bottom"></slot>
                 </div>

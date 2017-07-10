@@ -22,6 +22,12 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
     list: Object;
 
     @property()
+    isSelectable: Boolean;
+
+    @property()
+    cursor: string = "pointer";
+
+    @property()
     searchTokens: Array<string> = []
 
     @gestureListen("tap", "card")
@@ -42,21 +48,54 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
         this.page = this.selected ? "checkbox" : "picture";
     }
 
+    @computed("iconComputedStyle")
+    private iconSelectable(isSelectable: boolean) {
+        return isSelectable ? " cursor: pointer" : "";
+    }
+
+    regExpEscape(s: string) {
+        return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    };
+
     @observe('searchTokens, heading')
     headingChanged(searchTokens: any, heading: string) {
         if (searchTokens && searchTokens.length > 0 && typeof heading !== 'undefined') {
 
-            var regEx = new RegExp(`(${searchTokens.join(")|(")})`, 'i');
-            this.headingTokens = heading.split(regEx).filter(o => typeof o !== "undefined" && o !== "");
-            return
+            var regExPart = searchTokens.map((token: string) => {
+                return token.split('').map(o => this.regExpEscape(o)).join("[^string]*?")
+            }).join("|");
+            var regEx = new RegExp(regExPart, 'gi');
+            var wordsToHighlight = heading.match(regEx) || [];
+
+            var uniqueWordsToHighlight: Array<string> = [];
+
+            wordsToHighlight.filter(function (item) {
+                var i = uniqueWordsToHighlight.findIndex(x => x.toLowerCase() == item.toLowerCase());
+                if (i <= -1)
+                    uniqueWordsToHighlight.push(item);
+            });
+
+            var highlightedHeading = heading;
+            this.unique(wordsToHighlight).forEach((word: string) => {
+                var replaceRegEx = new RegExp(`(?!<span[^>]*?>)(${this.regExpEscape(word)})(?![^<]*?<\/span>)`, 'gi');
+                highlightedHeading = highlightedHeading.replace(replaceRegEx, `<span highlighted>${word}</span>`);
+            });
+
+            this.$.heading.innerHTML = highlightedHeading;
         }
-        this.headingTokens = [heading];
+        this.$.heading.innerHtml = [heading];
     }
 
-    private isHighlighted(heading: string) {
-        if (typeof heading != "string")
-            return "";
 
-        return this.searchTokens.some(o => o.toUpperCase() == heading.toUpperCase());
+
+    private unique(a: Array<string>) {
+        var uniqueWordsToHighlight: Array<string> = [];
+
+        a.filter(function (item) {
+            var i = uniqueWordsToHighlight.findIndex(x => x.toLowerCase() == item.toLowerCase());
+            if (i <= -1)
+                uniqueWordsToHighlight.push(item);
+        });
+        return uniqueWordsToHighlight;
     }
 }
