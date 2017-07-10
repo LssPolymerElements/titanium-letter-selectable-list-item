@@ -4,7 +4,13 @@
   "description": "",
   "main": "titanium-letter-selectable-list-item.html",
   "dependencies": {},
+  "scripts": {
+    "lint": "tslint \"/*.ts\"",
+    "build": "tsc",
+    "test": "npm run lint && npm run build"
+  },
   "devDependencies": {
+    "tslint": "^4.0.2",
     "browser-sync": "^2.18.2",
     "gulp": "^3.9.1"
   }
