@@ -67,6 +67,14 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
             var regEx = new RegExp(regExPart, 'gi');
             var wordsToHighlight = heading.match(regEx) || [];
 
+            var uniqueWordsToHighlight: Array<string> = [];
+
+            wordsToHighlight.filter(function (item) {
+                var i = uniqueWordsToHighlight.findIndex(x => x.toLowerCase() == item.toLowerCase());
+                if (i <= -1)
+                    uniqueWordsToHighlight.push(item);
+            });
+
             var highlightedHeading = heading;
             this.unique(wordsToHighlight).forEach((word: string) => {
                 var replaceRegEx = new RegExp(`(?!<span[^>]*?>)(${this.regExpEscape(word)})(?![^<]*?<\/span>)`, 'gi');
@@ -78,9 +86,16 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
         this.$.heading.innerHtml = [heading];
     }
 
+
+
     private unique(a: Array<string>) {
-        return a.filter(function (elem, pos) {
-            return a.toString().toLowerCase().indexOf(elem.toLowerCase()) == pos;
+        var uniqueWordsToHighlight: Array<string> = [];
+
+        a.filter(function (item) {
+            var i = uniqueWordsToHighlight.findIndex(x => x.toLowerCase() == item.toLowerCase());
+            if (i <= -1)
+                uniqueWordsToHighlight.push(item);
         });
+        return uniqueWordsToHighlight;
     }
 }
