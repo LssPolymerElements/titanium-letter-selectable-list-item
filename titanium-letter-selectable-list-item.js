@@ -31,18 +31,40 @@ let LetterSelectableListItem = class LetterSelectableListItem extends Polymer.Ge
     iconSelectable(isSelectable) {
         return isSelectable ? " cursor: pointer" : "";
     }
+    regExpEscape(s) {
+        return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    }
+    ;
     headingChanged(searchTokens, heading) {
         if (searchTokens && searchTokens.length > 0 && typeof heading !== 'undefined') {
-            var regEx = new RegExp(`(${searchTokens.join(")|(")})`, 'i');
-            this.headingTokens = heading.split(regEx).filter(o => typeof o !== "undefined" && o !== "");
-            return;
+            var regExPart = searchTokens.map((token) => {
+                return token.split('').map(o => this.regExpEscape(o)).join("[^string]*?");
+            }).join("|");
+            var regEx = new RegExp(regExPart, 'gi');
+            var wordsToHighlight = heading.match(regEx) || [];
+            var uniqueWordsToHighlight = [];
+            wordsToHighlight.filter(function (item) {
+                var i = uniqueWordsToHighlight.findIndex(x => x.toLowerCase() == item.toLowerCase());
+                if (i <= -1)
+                    uniqueWordsToHighlight.push(item);
+            });
+            var highlightedHeading = heading;
+            this.unique(wordsToHighlight).forEach((word) => {
+                var replaceRegEx = new RegExp(`(?!<span[^>]*?>)(${this.regExpEscape(word)})(?![^<]*?<\/span>)`, 'gi');
+                highlightedHeading = highlightedHeading.replace(replaceRegEx, `<span highlighted>${word}</span>`);
+            });
+            this.$.heading.innerHTML = highlightedHeading;
         }
-        this.headingTokens = [heading];
+        this.$.heading.innerHtml = [heading];
     }
-    isHighlighted(heading) {
-        if (typeof heading != "string")
-            return "";
-        return this.searchTokens.some(o => o.toUpperCase() == heading.toUpperCase());
+    unique(a) {
+        var uniqueWordsToHighlight = [];
+        a.filter(function (item) {
+            var i = uniqueWordsToHighlight.findIndex(x => x.toLowerCase() == item.toLowerCase());
+            if (i <= -1)
+                uniqueWordsToHighlight.push(item);
+        });
+        return uniqueWordsToHighlight;
     }
 };
 __decorate([
