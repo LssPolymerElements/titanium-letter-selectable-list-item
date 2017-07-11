@@ -20,6 +20,14 @@ test_script:
 # Don't actually build.
 build: off
 
+skip_tags: true
+deploy:
+- provider: GitHub
+  auth_token:
+    secure: 73BMyeWNs+Y0cyNA2FzsPiO4b93zn8pBdSO/oPc9GvT+znZj4vZAWF0bIu0G6G3i
+  on:
+    branch: master
+    
 notifications:
 - provider: Slack
   incoming_webhook:
