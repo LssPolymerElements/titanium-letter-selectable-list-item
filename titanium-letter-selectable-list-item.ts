@@ -86,8 +86,6 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
         this.$.heading.innerHtml = [heading];
     }
 
-
-
     private unique(a: Array<string>) {
         let uniqueWordsToHighlight: Array<string> = [];
 

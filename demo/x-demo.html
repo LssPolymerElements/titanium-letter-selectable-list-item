@@ -7,24 +7,27 @@
 
 <dom-module id="x-demo">
     <template>
-        <h3>titanium-letter-selectable-list-item </h3>
+        <style>
+            .list-item {
+                min-width: 220px;
+                --titanium-letter-selectable-list-item-paper-card: {
+                    margin: 8px;
+                }
+            }
+        </style>
+        <h3>Demo with highlighting and sub heading </h3>
         <iron-list id="list" selected-items="{{selectedItems}}" items="{{data}}" as="item" multi-selection selection-enabled>
             <template>
-                <titanium-letter-selectable-list-item sub-heading="SubHeading" heading="[[item.heading]]" selected="[[selected]]" item="[[item]]"
-                    is-selectable="true">
-                    <div slot="right">
-                        right slot
-                    </div>
-                    <div slot="bottom">
-                        bottom slot
-                    </div>
+                <titanium-letter-selectable-list-item class="list-item" search-tokens="[[searchTokens]]" sub-heading="[[item.subheading]]"
+                    heading="[[item.heading]]" selected="[[selected]]" item="[[item]]" is-selectable="true">
+
                 </titanium-letter-selectable-list-item>
             </template>
         </iron-list>
-        <h3>titanium-letter-selectable-list-item no select</h3>
+        <h3>Demo with with selection disabled and no sub headings</h3>
         <iron-list items="{{dataDos}}" as="item">
             <template>
-                <titanium-letter-selectable-list-item sub-heading="SubHeading" heading="[[item.heading]]" selected="[[selected]]" item="[[item]]">
+                <titanium-letter-selectable-list-item heading="[[item.heading]]" item="[[item]]">
                     <div slot="right">
                         right slot
                     </div>
@@ -52,16 +55,23 @@
 
             static get properties() {
                 return {
+                    searchTokens: {
+                        type: String,
+                        value: ["dogs"]
+                    },
                     data: {
                         value: function () {
                             return [{
-                                    "heading": "Heading one"
+                                    "heading": "Cats",
+                                    "subheading": "All about cats."
                                 },
                                 {
-                                    "heading": "Heading two"
+                                    "heading": "Small Dogs",
+                                    "subheading": "All about small dogs."
                                 },
                                 {
-                                    "heading": "Heading three"
+                                    "heading": "Large Dogs",
+                                    "subheading": "All about large dogs."
                                 }
                             ]
                         }
