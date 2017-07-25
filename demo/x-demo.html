@@ -16,7 +16,7 @@
             }
         </style>
         <h3>Demo with highlighting and sub heading </h3>
-        <iron-list id="list" selected-items="{{selectedItems}}" items="{{data}}" as="item" multi-selection selection-enabled>
+        <iron-list id="list" selected-items="{{selectedItems}}" elevation="3" items="{{data}}" as="item" multi-selection selection-enabled>
             <template>
                 <titanium-letter-selectable-list-item class="list-item" search-tokens="[[searchTokens]]" sub-heading="[[item.subheading]]"
                     heading="[[item.heading]]" selected="[[selected]]" item="[[item]]" is-selectable="true">
