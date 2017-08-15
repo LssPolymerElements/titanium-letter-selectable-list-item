@@ -24,10 +24,24 @@
                 </titanium-letter-selectable-list-item>
             </template>
         </iron-list>
-        <h3>Demo with with selection disabled and no sub headings</h3>
+        <h3>Demo with selection disabled and no sub headings</h3>
         <iron-list items="{{dataDos}}" as="item">
             <template>
                 <titanium-letter-selectable-list-item heading="[[item.heading]]" item="[[item]]">
+                    <div slot="right">
+                        right slot
+                    </div>
+                    <div slot="bottom">
+                        bottom slot
+                    </div>
+                </titanium-letter-selectable-list-item>
+            </template>
+        </iron-list>
+
+        <h3>Demo with circle hidden</h3>
+        <iron-list items="{{dataDos}}" as="item">
+            <template>
+                <titanium-letter-selectable-list-item hide-circle="true" heading="[[item.heading]]" item="[[item]]">
                     <div slot="right">
                         right slot
                     </div>

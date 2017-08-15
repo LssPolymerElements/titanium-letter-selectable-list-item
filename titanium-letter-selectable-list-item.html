@@ -50,7 +50,7 @@ Example:
                 @apply --layout-vertical;
                 @apply --layout-center;
                 @apply --layout-center-center;
-                
+
                 @apply --titanium-letter-selectable-list-item-neon-animated-pages;
             }
 
@@ -99,11 +99,15 @@ Example:
             paper-card[selected] {
                 background-color: #EDF4FD;
             }
+
+            [hidden] {
+                display: none !important;
+            }
         </style>
 
         <paper-card flex id="card" selected$="[[selected]]" elevation="[[elevation]]" tabIndex="1">
             <div class="card-content">
-                <neon-animated-pages id="icon-button" selected="[[page]]" attr-for-selected="name" sticky entry-animation="fade-in-animation"
+                <neon-animated-pages hidden$="[[hideCircle]]" id="icon-button" selected="[[page]]" attr-for-selected="name" sticky entry-animation="fade-in-animation"
                     exit-animation="fade-out-animation">
                     <titanium-circle-letter-icon name="picture" text="[[heading]]" size="40" style$="[[iconComputedStyle]]"></titanium-circle-letter-icon>
                     <paper-checkbox name="checkbox" checked="{{selected}}"></paper-checkbox>
