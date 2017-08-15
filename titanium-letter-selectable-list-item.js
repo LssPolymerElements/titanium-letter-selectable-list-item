@@ -13,6 +13,7 @@ let LetterSelectableListItem = class LetterSelectableListItem extends Polymer.Ge
         this.selected = false;
         this.headingTokens = [];
         this.elevation = 1;
+        this.hideCircle = false;
         this.page = 'picture';
         this.cursor = 'pointer';
         this.searchTokens = [];
@@ -91,6 +92,10 @@ __decorate([
     property(),
     __metadata("design:type", Number)
 ], LetterSelectableListItem.prototype, "elevation", void 0);
+__decorate([
+    property(),
+    __metadata("design:type", Boolean)
+], LetterSelectableListItem.prototype, "hideCircle", void 0);
 __decorate([
     property(),
     __metadata("design:type", String)

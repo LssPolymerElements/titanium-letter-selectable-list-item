@@ -19,6 +19,9 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
     elevation: number = 1;
 
     @property()
+    hideCircle: boolean = false;
+
+    @property()
     page: string = 'picture';
 
     @property()
