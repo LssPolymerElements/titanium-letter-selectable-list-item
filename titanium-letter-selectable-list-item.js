@@ -36,23 +36,22 @@ let LetterSelectableListItem = class LetterSelectableListItem extends Polymer.Ge
     regExpEscape(s) {
         return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
     }
-    ;
     headingChanged(searchTokens, heading) {
         if (searchTokens && searchTokens.length > 0 && typeof heading !== 'undefined') {
-            var regExPart = searchTokens.map((token) => {
-                return token.split('').map(o => this.regExpEscape(o)).join("[^string]*?");
-            }).join("|");
-            var regEx = new RegExp(regExPart, 'gi');
-            var wordsToHighlight = heading.match(regEx) || [];
-            var uniqueWordsToHighlight = [];
+            let regExPart = searchTokens.map((token) => {
+                return token.split('').map(o => this.regExpEscape(o)).join('[^string]*?');
+            }).join('|');
+            let regEx = new RegExp(regExPart, 'gi');
+            let wordsToHighlight = heading.match(regEx) || [];
+            let uniqueWordsToHighlight = [];
             wordsToHighlight.filter(function (item) {
-                var i = uniqueWordsToHighlight.findIndex(x => x.toLowerCase() == item.toLowerCase());
+                let i = uniqueWordsToHighlight.findIndex(x => x.toLowerCase() === item.toLowerCase());
                 if (i <= -1)
                     uniqueWordsToHighlight.push(item);
             });
-            var highlightedHeading = heading;
+            let highlightedHeading = heading;
             this.unique(wordsToHighlight).forEach((word) => {
-                var replaceRegEx = new RegExp(`(?!<span[^>]*?>)(${this.regExpEscape(word)})(?![^<]*?<\/span>)`, 'gi');
+                let replaceRegEx = new RegExp(`(?!<span[^>]*?>)(${this.regExpEscape(word)})(?![^<]*?<\/span>)`, 'gi');
                 highlightedHeading = highlightedHeading.replace(replaceRegEx, `<span highlighted>${word}</span>`);
             });
             this.$.heading.innerHTML = highlightedHeading;
@@ -61,9 +60,9 @@ let LetterSelectableListItem = class LetterSelectableListItem extends Polymer.Ge
         this.$.heading.innerHTML = heading;
     }
     unique(a) {
-        var uniqueWordsToHighlight = [];
+        let uniqueWordsToHighlight = [];
         a.filter(function (item) {
-            var i = uniqueWordsToHighlight.findIndex(x => x.toLowerCase() == item.toLowerCase());
+            let i = uniqueWordsToHighlight.findIndex(x => x.toLowerCase() === item.toLowerCase());
             if (i <= -1)
                 uniqueWordsToHighlight.push(item);
         });
