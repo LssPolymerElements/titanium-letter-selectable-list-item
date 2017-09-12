@@ -12,8 +12,10 @@ let LetterSelectableListItem = class LetterSelectableListItem extends Polymer.Ge
         super(...arguments);
         this.selected = false;
         this.headingTokens = [];
-        this.page = "picture";
-        this.cursor = "pointer";
+        this.elevation = 1;
+        this.hideCircle = false;
+        this.page = 'picture';
+        this.cursor = 'pointer';
         this.searchTokens = [];
     }
     onCardTap(e) {
@@ -23,13 +25,13 @@ let LetterSelectableListItem = class LetterSelectableListItem extends Polymer.Ge
     toggleSelected(e) {
         e.stopPropagation();
         let options = { bubbles: true, composed: true, detail: this.item };
-        this.dispatchEvent(new CustomEvent("item-selected", options));
+        this.dispatchEvent(new CustomEvent('item-selected', options));
     }
     selectedChanged(value) {
-        this.page = this.selected ? "checkbox" : "picture";
+        this.page = this.selected ? 'checkbox' : 'picture';
     }
     iconSelectable(isSelectable) {
-        return isSelectable ? " cursor: pointer" : "";
+        return isSelectable ? ' cursor: pointer' : '';
     }
     regExpEscape(s) {
         return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
@@ -90,6 +92,14 @@ __decorate([
 ], LetterSelectableListItem.prototype, "subHeading", void 0);
 __decorate([
     property(),
+    __metadata("design:type", Number)
+], LetterSelectableListItem.prototype, "elevation", void 0);
+__decorate([
+    property(),
+    __metadata("design:type", Boolean)
+], LetterSelectableListItem.prototype, "hideCircle", void 0);
+__decorate([
+    property(),
     __metadata("design:type", String)
 ], LetterSelectableListItem.prototype, "page", void 0);
 __decorate([
@@ -109,13 +119,13 @@ __decorate([
     __metadata("design:type", Array)
 ], LetterSelectableListItem.prototype, "searchTokens", void 0);
 __decorate([
-    gestureListen("tap", "card"),
+    gestureListen('tap', 'card'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], LetterSelectableListItem.prototype, "onCardTap", null);
 __decorate([
-    gestureListen("tap", "icon-button"),
+    gestureListen('tap', 'icon-button'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
@@ -127,7 +137,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], LetterSelectableListItem.prototype, "selectedChanged", null);
 __decorate([
-    computed("iconComputedStyle"),
+    computed('iconComputedStyle'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Boolean]),
     __metadata("design:returntype", void 0)
@@ -139,5 +149,5 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], LetterSelectableListItem.prototype, "headingChanged", null);
 LetterSelectableListItem = __decorate([
-    customElement("titanium-letter-selectable-list-item")
+    customElement('titanium-letter-selectable-list-item')
 ], LetterSelectableListItem);

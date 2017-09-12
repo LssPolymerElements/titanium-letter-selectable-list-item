@@ -1,4 +1,4 @@
-@customElement("titanium-letter-selectable-list-item")
+@customElement('titanium-letter-selectable-list-item')
 class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Element) {
     @property()
     item: any;
@@ -16,7 +16,13 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
     subHeading: string;
 
     @property()
-    page: string = "picture";
+    elevation: number = 1;
+
+    @property()
+    hideCircle: boolean = false;
+
+    @property()
+    page: string = 'picture';
 
     @property()
     list: Object;
@@ -25,59 +31,59 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
     isSelectable: Boolean;
 
     @property()
-    cursor: string = "pointer";
+    cursor: string = 'pointer';
 
     @property()
-    searchTokens: Array<string> = []
+    searchTokens: Array<string> = [];
 
-    @gestureListen("tap", "card")
+    @gestureListen('tap', 'card')
     onCardTap(e: any) {
         let options: any = { bubbles: true, composed: true, detail: e };
         this.dispatchEvent(new CustomEvent('card-tap', options));
     }
 
-    @gestureListen("tap", "icon-button")
+    @gestureListen('tap', 'icon-button')
     toggleSelected(e: any) {
         e.stopPropagation();
         let options: any = { bubbles: true, composed: true, detail: this.item };
-        this.dispatchEvent(new CustomEvent("item-selected", options));
+        this.dispatchEvent(new CustomEvent('item-selected', options));
     }
 
     @observe('selected')
     private selectedChanged(value: any) {
-        this.page = this.selected ? "checkbox" : "picture";
+        this.page = this.selected ? 'checkbox' : 'picture';
     }
 
-    @computed("iconComputedStyle")
+    @computed('iconComputedStyle')
     private iconSelectable(isSelectable: boolean) {
-        return isSelectable ? " cursor: pointer" : "";
+        return isSelectable ? ' cursor: pointer' : '';
     }
 
     regExpEscape(s: string) {
         return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-    };
+    }
 
     @observe('searchTokens, heading')
     headingChanged(searchTokens: any, heading: string) {
         if (searchTokens && searchTokens.length > 0 && typeof heading !== 'undefined') {
 
-            var regExPart = searchTokens.map((token: string) => {
-                return token.split('').map(o => this.regExpEscape(o)).join("[^string]*?")
-            }).join("|");
-            var regEx = new RegExp(regExPart, 'gi');
-            var wordsToHighlight = heading.match(regEx) || [];
+            let regExPart = searchTokens.map((token: string) => {
+                return token.split('').map(o => this.regExpEscape(o)).join('[^string]*?');
+            }).join('|');
+            let regEx = new RegExp(regExPart, 'gi');
+            let wordsToHighlight = heading.match(regEx) || [];
 
-            var uniqueWordsToHighlight: Array<string> = [];
+            let uniqueWordsToHighlight: Array<string> = [];
 
             wordsToHighlight.filter(function (item) {
-                var i = uniqueWordsToHighlight.findIndex(x => x.toLowerCase() == item.toLowerCase());
+                let i = uniqueWordsToHighlight.findIndex(x => x.toLowerCase() === item.toLowerCase());
                 if (i <= -1)
                     uniqueWordsToHighlight.push(item);
             });
 
-            var highlightedHeading = heading;
+            let highlightedHeading = heading;
             this.unique(wordsToHighlight).forEach((word: string) => {
-                var replaceRegEx = new RegExp(`(?!<span[^>]*?>)(${this.regExpEscape(word)})(?![^<]*?<\/span>)`, 'gi');
+                let replaceRegEx = new RegExp(`(?!<span[^>]*?>)(${this.regExpEscape(word)})(?![^<]*?<\/span>)`, 'gi');
                 highlightedHeading = highlightedHeading.replace(replaceRegEx, `<span highlighted>${word}</span>`);
             });
 
@@ -87,13 +93,11 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
         this.$.heading.innerHTML = heading;
     }
 
-
-
     private unique(a: Array<string>) {
-        var uniqueWordsToHighlight: Array<string> = [];
+        let uniqueWordsToHighlight: Array<string> = [];
 
         a.filter(function (item) {
-            var i = uniqueWordsToHighlight.findIndex(x => x.toLowerCase() == item.toLowerCase());
+            let i = uniqueWordsToHighlight.findIndex(x => x.toLowerCase() === item.toLowerCase());
             if (i <= -1)
                 uniqueWordsToHighlight.push(item);
         });

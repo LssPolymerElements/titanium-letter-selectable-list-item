@@ -6,7 +6,7 @@
 <link rel="import" href="../neon-animation/neon-animated-pages.html">
 <link rel="import" href="../neon-animation/animations/fade-in-animation.html">
 <link rel="import" href="../neon-animation/animations/fade-out-animation.html">
-<link rel="import" href="./styles/flex-paper-card-styles.html">
+<link rel="import" href="styles/flex-paper-card-styles.html">
 <link rel="import" href="../polymer/lib/mixins/gesture-event-listeners.html">
 
 <!--
@@ -32,7 +32,6 @@ Example:
 
         <style include="flex-paper-card-styles">
             paper-card {
-                margin: 8px;
                 @apply --titanium-letter-selectable-list-item-paper-card;
                 --paper-card-content: {
                     @apply --layout-horizontal;
@@ -51,6 +50,8 @@ Example:
                 @apply --layout-vertical;
                 @apply --layout-center;
                 @apply --layout-center-center;
+
+                @apply --titanium-letter-selectable-list-item-neon-animated-pages;
             }
 
             neon-animated-pages paper-checkbox {
@@ -98,19 +99,23 @@ Example:
             paper-card[selected] {
                 background-color: #EDF4FD;
             }
+
+            [hidden] {
+                display: none !important;
+            }
         </style>
 
-        <paper-card flex id="card" selected$="[[selected]]" elevation="1" tabIndex="1">
+        <paper-card flex id="card" selected$="[[selected]]" elevation="[[elevation]]" tabIndex="1">
             <div class="card-content">
-                <neon-animated-pages id="icon-button" selected="[[page]]" attr-for-selected="name" sticky entry-animation="fade-in-animation"
+                <neon-animated-pages hidden$="[[hideCircle]]" id="icon-button" selected="[[page]]" attr-for-selected="name" sticky entry-animation="fade-in-animation"
                     exit-animation="fade-out-animation">
                     <titanium-circle-letter-icon name="picture" text="[[heading]]" size="40" style$="[[iconComputedStyle]]"></titanium-circle-letter-icon>
                     <paper-checkbox name="checkbox" checked="{{selected}}"></paper-checkbox>
                 </neon-animated-pages>
                 <div class="main-text-container">
-                    <heading id="heading"></heading>
+                    <heading id="heading">[[heading]]</heading>
                     <sub-heading> [[subHeading]] </sub-heading>
-                    <slot name="bottom"></slot>
+                    <slot class="bottom-slot" name="bottom"></slot>
                 </div>
                 <slot name="right"></slot>
             </div>
