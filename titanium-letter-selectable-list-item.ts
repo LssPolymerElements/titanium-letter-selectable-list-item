@@ -82,8 +82,9 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
             });
 
             this.$.heading.innerHTML = highlightedHeading;
+            return;
         }
-        this.$.heading.innerHtml = [heading];
+        this.$.heading.innerHTML = heading;
     }
 
 
