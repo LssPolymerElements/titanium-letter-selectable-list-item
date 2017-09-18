@@ -46,7 +46,7 @@ let LetterSelectableListItem = class LetterSelectableListItem extends Polymer.Ge
     }
     onCardTap(e) {
         e.stopPropagation();
-        let options = { bubbles: true, composed: true, detail: e };
+        let options = { bubbles: true, composed: true, detail: { item: this.item, event: e } };
         this.dispatchEvent(new CustomEvent('card-tap', options));
     }
     toggleSelected(e) {
