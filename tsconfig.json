@@ -11,6 +11,10 @@
     "typeRoots": ["types"]
   },
   "compileOnSave": true,
+  "include": [
+    "bower_components/**/*.ts",
+    "**/*.ts"
+  ],
   "exclude": [
     "build",
     "node_modules",

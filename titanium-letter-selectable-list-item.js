@@ -55,8 +55,9 @@ let LetterSelectableListItem = class LetterSelectableListItem extends Polymer.Ge
                 highlightedHeading = highlightedHeading.replace(replaceRegEx, `<span highlighted>${word}</span>`);
             });
             this.$.heading.innerHTML = highlightedHeading;
+            return;
         }
-        this.$.heading.innerHtml = [heading];
+        this.$.heading.innerHTML = heading;
     }
     unique(a) {
         let uniqueWordsToHighlight = [];
