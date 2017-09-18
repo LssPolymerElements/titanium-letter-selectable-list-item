@@ -19,7 +19,7 @@
         <iron-list id="list" selected-items="{{selectedItems}}" elevation="3" items="{{data}}" as="item" multi-selection selection-enabled>
             <template>
                 <titanium-letter-selectable-list-item class="list-item" search-tokens="[[searchTokens]]" sub-heading="[[item.subheading]]"
-                    heading="[[item.heading]]" selected="[[selected]]" item="[[item]]" is-selectable="true">
+                    heading="[[item.heading]]" selected="[[selected]]" item="[[item]]">
 
                 </titanium-letter-selectable-list-item>
             </template>
@@ -38,16 +38,44 @@
             </template>
         </iron-list>
 
-        <h3>Demo with circle hidden</h3>
+        <h3>Demo with no icon</h3>
         <iron-list items="{{dataDos}}" as="item">
             <template>
-                <titanium-letter-selectable-list-item hide-circle="true" heading="[[item.heading]]" item="[[item]]">
+                <titanium-letter-selectable-list-item hide-icon heading="[[item.heading]]" item="[[item]]">
                     <div slot="right">
                         right slot
                     </div>
                     <div slot="bottom">
                         bottom slot
                     </div>
+                </titanium-letter-selectable-list-item>
+            </template>
+        </iron-list>
+
+        <h3>Demo with custom icon</h3>
+        <iron-list items="{{dataDos}}" as="item">
+            <template>
+                <titanium-letter-selectable-list-item heading="[[item.heading]]" item="[[item]]">
+                    <div slot="icon-slot">
+                        <b>B</b>
+                    </div>
+                    <div slot="right">
+                        right slot
+                    </div>
+                    <div slot="bottom">
+                        bottom slot
+                    </div>
+                </titanium-letter-selectable-list-item>
+            </template>
+        </iron-list>
+
+
+        <h3>Demo selection disabled list item </h3>
+        <iron-list id="list" selected-items="{{selectedItems}}" elevation="3" items="{{data}}" as="item">
+            <template>
+                <titanium-letter-selectable-list-item class="list-item" search-tokens="[[searchTokens]]" sub-heading="[[item.subheading]]"
+                    heading="[[item.heading]]" selected="[[selected]]" item="[[item]]" disable-selection>
+
                 </titanium-letter-selectable-list-item>
             </template>
         </iron-list>
