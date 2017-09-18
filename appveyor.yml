@@ -21,7 +21,7 @@ test_script:
 build: off
 
 skip_tags: true
-version: 1.0.{build}
+version: 2.0.{build}
 deploy:
 - provider: GitHub
   auth_token:
