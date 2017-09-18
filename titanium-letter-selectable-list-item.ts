@@ -19,44 +19,72 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
     elevation: number = 1;
 
     @property()
-    hideCircle: boolean = false;
-
-    @property()
-    page: string = 'picture';
+    hideIcon: boolean;
 
     @property()
     list: Object;
 
     @property()
-    isSelectable: Boolean;
-
-    @property()
-    cursor: string = 'pointer';
+    disableSelection: boolean;
 
     @property()
     searchTokens: Array<string> = [];
 
+    ready() {
+        // Polyfill IE11
+        // https://tc39.github.io/ecma262/#sec-array.prototype.findIndex
+        if (!Array.prototype.findIndex) {
+            Object.defineProperty(Array.prototype, 'findIndex', {
+                value: function (predicate: any) {
+                    if (this == null) {
+                        throw new TypeError('"this" is null or not defined');
+                    }
+
+                    let o = Object(this);
+                    let len = o.length >>> 0;
+                    if (typeof predicate !== 'function') {
+                        throw new TypeError('predicate must be a function');
+                    }
+                    let thisArg = arguments[1];
+                    let k = 0;
+                    while (k < len) {
+                        let kValue = o[k];
+                        if (predicate.call(thisArg, kValue, k, o)) {
+                            return k;
+                        }
+                        k++;
+                    }
+                    return -1;
+                }
+            });
+        }
+
+        super.ready();
+
+
+    }
+
     @gestureListen('tap', 'card')
     onCardTap(e: any) {
+        e.stopPropagation();
         let options: any = { bubbles: true, composed: true, detail: e };
         this.dispatchEvent(new CustomEvent('card-tap', options));
     }
 
-    @gestureListen('tap', 'icon-button')
+    @gestureListen('tap', 'icon-container')
     toggleSelected(e: any) {
-        e.stopPropagation();
-        let options: any = { bubbles: true, composed: true, detail: this.item };
-        this.dispatchEvent(new CustomEvent('item-selected', options));
+        if (this.disableSelection)
+            return;
+
+        if (this.selected)
+            this.selected = false;
+        else
+            this.selected = true;
     }
 
-    @observe('selected')
-    private selectedChanged(value: any) {
-        this.page = this.selected ? 'checkbox' : 'picture';
-    }
-
-    @computed('iconComputedStyle')
-    private iconSelectable(isSelectable: boolean) {
-        return isSelectable ? ' cursor: pointer' : '';
+    @computed('iconComputedStyle', ['disableSelection'])
+    private iconSelectable(disableSelection: boolean) {
+        return disableSelection ? '' : 'cursor: pointer';
     }
 
     regExpEscape(s: string) {
@@ -64,15 +92,17 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
     }
 
     @observe('searchTokens, heading')
-    headingChanged(searchTokens: any, heading: string) {
-        if (searchTokens && searchTokens.length > 0 && typeof heading !== 'undefined') {
+    headingChanged(searchTokens: Array<string>, heading: string) {
 
-            let regExPart = searchTokens.map((token: string) => {
+        let sTokens = searchTokens.filter(o => o !== '');
+
+        if (sTokens && sTokens.length > 0 && typeof heading !== 'undefined') {
+
+            let regExPart = sTokens.map((token: string) => {
                 return token.split('').map(o => this.regExpEscape(o)).join('[^string]*?');
             }).join('|');
             let regEx = new RegExp(regExPart, 'gi');
             let wordsToHighlight = heading.match(regEx) || [];
-
             let uniqueWordsToHighlight: Array<string> = [];
 
             wordsToHighlight.filter(function (item) {

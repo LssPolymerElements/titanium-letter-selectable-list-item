@@ -13,32 +13,60 @@ let LetterSelectableListItem = class LetterSelectableListItem extends Polymer.Ge
         this.selected = false;
         this.headingTokens = [];
         this.elevation = 1;
-        this.hideCircle = false;
-        this.page = 'picture';
-        this.cursor = 'pointer';
         this.searchTokens = [];
     }
+    ready() {
+        // Polyfill IE11
+        // https://tc39.github.io/ecma262/#sec-array.prototype.findIndex
+        if (!Array.prototype.findIndex) {
+            Object.defineProperty(Array.prototype, 'findIndex', {
+                value: function (predicate) {
+                    if (this == null) {
+                        throw new TypeError('"this" is null or not defined');
+                    }
+                    let o = Object(this);
+                    let len = o.length >>> 0;
+                    if (typeof predicate !== 'function') {
+                        throw new TypeError('predicate must be a function');
+                    }
+                    let thisArg = arguments[1];
+                    let k = 0;
+                    while (k < len) {
+                        let kValue = o[k];
+                        if (predicate.call(thisArg, kValue, k, o)) {
+                            return k;
+                        }
+                        k++;
+                    }
+                    return -1;
+                }
+            });
+        }
+        super.ready();
+    }
     onCardTap(e) {
+        e.stopPropagation();
         let options = { bubbles: true, composed: true, detail: e };
         this.dispatchEvent(new CustomEvent('card-tap', options));
     }
     toggleSelected(e) {
-        e.stopPropagation();
-        let options = { bubbles: true, composed: true, detail: this.item };
-        this.dispatchEvent(new CustomEvent('item-selected', options));
+        if (this.disableSelection)
+            return;
+        if (this.selected)
+            this.selected = false;
+        else
+            this.selected = true;
     }
-    selectedChanged(value) {
-        this.page = this.selected ? 'checkbox' : 'picture';
-    }
-    iconSelectable(isSelectable) {
-        return isSelectable ? ' cursor: pointer' : '';
+    iconSelectable(disableSelection) {
+        return disableSelection ? '' : 'cursor: pointer';
     }
     regExpEscape(s) {
         return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
     }
     headingChanged(searchTokens, heading) {
-        if (searchTokens && searchTokens.length > 0 && typeof heading !== 'undefined') {
-            let regExPart = searchTokens.map((token) => {
+        let sTokens = searchTokens.filter(o => o !== '');
+        if (sTokens && sTokens.length > 0 && typeof heading !== 'undefined') {
+            let regExPart = sTokens.map((token) => {
                 return token.split('').map(o => this.regExpEscape(o)).join('[^string]*?');
             }).join('|');
             let regEx = new RegExp(regExPart, 'gi');
@@ -96,11 +124,7 @@ __decorate([
 __decorate([
     property(),
     __metadata("design:type", Boolean)
-], LetterSelectableListItem.prototype, "hideCircle", void 0);
-__decorate([
-    property(),
-    __metadata("design:type", String)
-], LetterSelectableListItem.prototype, "page", void 0);
+], LetterSelectableListItem.prototype, "hideIcon", void 0);
 __decorate([
     property(),
     __metadata("design:type", Object)
@@ -108,11 +132,7 @@ __decorate([
 __decorate([
     property(),
     __metadata("design:type", Boolean)
-], LetterSelectableListItem.prototype, "isSelectable", void 0);
-__decorate([
-    property(),
-    __metadata("design:type", String)
-], LetterSelectableListItem.prototype, "cursor", void 0);
+], LetterSelectableListItem.prototype, "disableSelection", void 0);
 __decorate([
     property(),
     __metadata("design:type", Array)
@@ -124,19 +144,13 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], LetterSelectableListItem.prototype, "onCardTap", null);
 __decorate([
-    gestureListen('tap', 'icon-button'),
+    gestureListen('tap', 'icon-container'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], LetterSelectableListItem.prototype, "toggleSelected", null);
 __decorate([
-    observe('selected'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], LetterSelectableListItem.prototype, "selectedChanged", null);
-__decorate([
-    computed('iconComputedStyle'),
+    computed('iconComputedStyle', ['disableSelection']),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Boolean]),
     __metadata("design:returntype", void 0)
@@ -144,7 +158,7 @@ __decorate([
 __decorate([
     observe('searchTokens, heading'),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:paramtypes", [Array, String]),
     __metadata("design:returntype", void 0)
 ], LetterSelectableListItem.prototype, "headingChanged", null);
 LetterSelectableListItem = __decorate([

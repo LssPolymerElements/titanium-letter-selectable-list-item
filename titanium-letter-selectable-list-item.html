@@ -3,11 +3,8 @@
 <link rel="import" href="../paper-card/paper-card.html">
 <link rel="import" href="../paper-checkbox/paper-checkbox.html">
 <link rel="import" href="../titanium-circle-letter-icon/titanium-circle-letter-icon.html">
-<link rel="import" href="../neon-animation/neon-animated-pages.html">
-<link rel="import" href="../neon-animation/animations/fade-in-animation.html">
-<link rel="import" href="../neon-animation/animations/fade-out-animation.html">
-<link rel="import" href="styles/flex-paper-card-styles.html">
 <link rel="import" href="../polymer/lib/mixins/gesture-event-listeners.html">
+<link rel="import" href="styles/flex-paper-card-styles.html">
 
 <!--
 A Polymer element to display a list item with a selectable letter icon in a paper card.
@@ -43,25 +40,43 @@ Example:
                 outline-width: 0;
             }
 
-            neon-animated-pages {
+            .icon-container {
+                position: relative;
                 margin: 8px;
                 height: 40px;
                 width: 40px;
                 @apply --layout-vertical;
                 @apply --layout-center;
                 @apply --layout-center-center;
-
-                @apply --titanium-letter-selectable-list-item-neon-animated-pages;
+                @apply --titanium-letter-selectable-list-icon-container;
             }
 
-            neon-animated-pages paper-checkbox {
-                position: relative !important;
-                --paper-checkbox-label-spacing: 0px;
+            [hide] {
+                opacity: 0;
+                transition: visibility 0s, opacity 0.2s linear;
+                -webkit-transition: visibility 0s, opacity 0.2s linear;
+                -moz-transition: visibility 0s, opacity 0.2s linear;
+                -ms-transition: visibility 0s, opacity 0.2s linear;
+                -o-transition: visibility 0s, opacity 0.2s linear;
             }
 
-            neon-animated-pages iron-icon {
-                height: 40px;
-                width: 40px;
+            paper-checkbox {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                bottom: 0;
+                right: 0;
+            }
+
+            titanium-circle-letter-icon,
+            paper-checkbox {
+                opacity: 1;
+                transition: visibility 0s, opacity 0.2s linear;
+                -webkit-transition: visibility 0s, opacity 0.2s linear;
+                -moz-transition: visibility 0s, opacity 0.2s linear;
+                -ms-transition: visibility 0s, opacity 0.2s linear;
+                -o-transition: visibility 0s, opacity 0.2s linear;
             }
 
             .main-text-container {
@@ -75,7 +90,7 @@ Example:
             heading {
                 display: block;
                 @apply --paper-font-common-nowrap;
-                font-size: 24px;
+                font-size: 18px;
                 font-weight: 400;
                 min-width: 0;
 
@@ -107,11 +122,13 @@ Example:
 
         <paper-card flex id="card" selected$="[[selected]]" elevation="[[elevation]]" tabIndex="1">
             <div class="card-content">
-                <neon-animated-pages hidden$="[[hideCircle]]" id="icon-button" selected="[[page]]" attr-for-selected="name" sticky entry-animation="fade-in-animation"
-                    exit-animation="fade-out-animation">
-                    <titanium-circle-letter-icon name="picture" text="[[heading]]" size="40" style$="[[iconComputedStyle]]"></titanium-circle-letter-icon>
-                    <paper-checkbox name="checkbox" checked="{{selected}}"></paper-checkbox>
-                </neon-animated-pages>
+                <div class="icon-container" hidden$="[[hideIcon]]" id="icon-container" style$="[[iconComputedStyle]]">
+                    <slot name="icon-slot">
+                        <titanium-circle-letter-icon hide$="[[selected]]" text="[[heading]]" size="40"></titanium-circle-letter-icon>
+                        <paper-checkbox hidden$="[[disableSelection]]" hide$="[[!selected]]" checked="[[selected]]"></paper-checkbox>
+                    </slot>
+                </div>
+
                 <div class="main-text-container">
                     <heading id="heading">[[heading]]</heading>
                     <sub-heading> [[subHeading]] </sub-heading>
