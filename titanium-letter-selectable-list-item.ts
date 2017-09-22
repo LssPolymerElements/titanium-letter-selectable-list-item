@@ -82,11 +82,6 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
             this.selected = true;
     }
 
-    @computed('iconComputedStyle', ['disableSelection'])
-    private iconSelectable(disableSelection: boolean) {
-        return disableSelection ? '' : 'cursor: pointer';
-    }
-
     regExpEscape(s: string) {
         return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
     }

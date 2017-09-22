@@ -41,6 +41,7 @@ Example:
             }
 
             .icon-container {
+                cursor: pointer;
                 position: relative;
                 margin: 8px;
                 height: 40px;
@@ -49,6 +50,10 @@ Example:
                 @apply --layout-center;
                 @apply --layout-center-center;
                 @apply --titanium-letter-selectable-list-icon-container;
+            }
+
+            .icon-container[not-selectable] {
+                cursor: inherit;
             }
 
             [hide] {
@@ -122,7 +127,7 @@ Example:
 
         <paper-card flex id="card" selected$="[[selected]]" elevation="[[elevation]]" tabIndex="1">
             <div class="card-content">
-                <div class="icon-container" hidden$="[[hideIcon]]" id="icon-container" style$="[[iconComputedStyle]]">
+                <div not-selectable$="[[disableSelection]]" class="icon-container" hidden$="[[hideIcon]]" id="icon-container">
                     <slot name="icon-slot">
                         <titanium-circle-letter-icon hide$="[[selected]]" text="[[heading]]" size="40"></titanium-circle-letter-icon>
                         <paper-checkbox hidden$="[[disableSelection]]" hide$="[[!selected]]" checked="[[selected]]"></paper-checkbox>

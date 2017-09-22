@@ -57,9 +57,6 @@ let LetterSelectableListItem = class LetterSelectableListItem extends Polymer.Ge
         else
             this.selected = true;
     }
-    iconSelectable(disableSelection) {
-        return disableSelection ? '' : 'cursor: pointer';
-    }
     regExpEscape(s) {
         return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
     }
@@ -149,12 +146,6 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], LetterSelectableListItem.prototype, "toggleSelected", null);
-__decorate([
-    computed('iconComputedStyle', ['disableSelection']),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Boolean]),
-    __metadata("design:returntype", void 0)
-], LetterSelectableListItem.prototype, "iconSelectable", null);
 __decorate([
     observe('searchTokens, heading'),
     __metadata("design:type", Function),
