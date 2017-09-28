@@ -16,6 +16,7 @@
             }
         </style>
         <h3>Demo with highlighting and sub heading </h3>
+        <h4>Selected Count:[[selectedItems.length]]</h4>
         <iron-list id="list" selected-items="{{selectedItems}}" elevation="3" items="{{data}}" as="item" multi-selection selection-enabled>
             <template>
                 <titanium-letter-selectable-list-item class="list-item" search-tokens="[[searchTokens]]" sub-heading="[[item.subheading]]"
@@ -24,7 +25,7 @@
                 </titanium-letter-selectable-list-item>
             </template>
         </iron-list>
-        <h3>Demo with selection disabled and no sub headings</h3>
+        <h3>Demo with no sub headings</h3>
         <iron-list items="{{dataDos}}" as="item">
             <template>
                 <titanium-letter-selectable-list-item heading="[[item.heading]]" item="[[item]]">
@@ -71,7 +72,7 @@
 
 
         <h3>Demo selection disabled list item </h3>
-        <iron-list id="list" selected-items="{{selectedItems}}" elevation="3" items="{{data}}" as="item">
+        <iron-list id="disabledList" elevation="3" items="{{data}}" as="item">
             <template>
                 <titanium-letter-selectable-list-item class="list-item" search-tokens="[[searchTokens]]" sub-heading="[[item.subheading]]"
                     heading="[[item.heading]]" selected="[[selected]]" item="[[item]]" disable-selection>
@@ -131,6 +132,11 @@
                                 }
                             ]
                         },
+                    },
+                    selectedItems: {
+                        value: function () {
+                            return [];
+                        }
                     }
                 }
             }
