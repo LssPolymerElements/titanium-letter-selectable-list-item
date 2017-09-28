@@ -80,6 +80,9 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
             this.selected = false;
         else
             this.selected = true;
+
+        let options: any = { bubbles: true, composed: true, detail: { item: this.item, selected: this.selected, event: e } };
+        this.dispatchEvent(new CustomEvent('icon-tap', options));
     }
 
     regExpEscape(s: string) {

@@ -56,6 +56,8 @@ let LetterSelectableListItem = class LetterSelectableListItem extends Polymer.Ge
             this.selected = false;
         else
             this.selected = true;
+        let options = { bubbles: true, composed: true, detail: { item: this.item, selected: this.selected, event: e } };
+        this.dispatchEvent(new CustomEvent('icon-tap', options));
     }
     regExpEscape(s) {
         return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
