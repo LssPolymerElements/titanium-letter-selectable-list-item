@@ -52,12 +52,8 @@ let LetterSelectableListItem = class LetterSelectableListItem extends Polymer.Ge
     toggleSelected(e) {
         if (this.disableSelection)
             return;
-        if (this.selected)
-            this.selected = false;
-        else
-            this.selected = true;
         let options = { bubbles: true, composed: true, detail: { item: this.item, selected: this.selected, event: e } };
-        this.dispatchEvent(new CustomEvent('icon-tap', options));
+        this.dispatchEvent(new CustomEvent('tap', options));
     }
     regExpEscape(s) {
         return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
@@ -101,7 +97,7 @@ __decorate([
     __metadata("design:type", Object)
 ], LetterSelectableListItem.prototype, "item", void 0);
 __decorate([
-    property({ notify: true }),
+    property({ notify: true, reflectToAttribute: true }),
     __metadata("design:type", Boolean)
 ], LetterSelectableListItem.prototype, "selected", void 0);
 __decorate([

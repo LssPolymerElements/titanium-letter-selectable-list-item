@@ -3,7 +3,7 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
     @property()
     item: any;
 
-    @property({ notify: true })
+    @property({ notify: true, reflectToAttribute: true })
     selected: boolean = false;
 
     @property()
@@ -76,13 +76,8 @@ class LetterSelectableListItem extends Polymer.GestureEventListeners(Polymer.Ele
         if (this.disableSelection)
             return;
 
-        if (this.selected)
-            this.selected = false;
-        else
-            this.selected = true;
-
         let options: any = { bubbles: true, composed: true, detail: { item: this.item, selected: this.selected, event: e } };
-        this.dispatchEvent(new CustomEvent('icon-tap', options));
+        this.dispatchEvent(new CustomEvent('tap', options));
     }
 
     regExpEscape(s: string) {
