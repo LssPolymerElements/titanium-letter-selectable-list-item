@@ -1,7 +1,7 @@
 {
   "name": "titanium-letter-selectable-list-item",
   "main": "titanium-letter-selectable-list-item.html",
-  "version": "1.0.7",
+  "version": "2.0.7",
   "authors": [
     "Leavitt Software Solutions"
   ],
@@ -21,13 +21,15 @@
   "description": "`titanium-letter-selectable-list-item` given data, displays a selectable list item with a titanium-circle-letter-icon. Polymer 2",
   "license": "MIT",
   "dependencies": {
-    "polymer": "Polymer/polymer#^2.0.0",
-    "polymer2-ts": "^1.0.0",
+    "polymer": "Polymer/polymer#^2.4.0",
+    "polymer-decorators": "^2.0.1",
     "paper-card": "PolymerElements/paper-card#^2.0.0",
     "paper-checkbox": "PolymerElements/paper-checkbox#^2.0.0",
-    "titanium-circle-letter-icon": "^2.0.0",
+    "titanium-circle-letter-icon": "^3.0.0",
     "neon-animation": "PolymerElements/neon-animation#^2.0.1",
-    "iron-flex-layout": "PolymerElements/iron-flex-layout#^2.0.0"
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#^2.0.0",
+    "mark.js": "^8.11.0",
+    "reflect-metadata": "rbuckton/reflect-metadata#^0.1.12"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
