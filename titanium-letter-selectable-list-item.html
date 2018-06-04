@@ -9,6 +9,7 @@
 <link rel="import" href="../titanium-circle-letter-icon/titanium-circle-letter-icon.html">
 <link rel="import" href="../polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="styles/flex-paper-card-styles.html">
+<link rel="import" href="mark-js.html">
 
 <!--
 A Polymer element to display a list item with a selectable letter icon in a paper card.
@@ -116,7 +117,7 @@ Example:
                 @apply --titanium-letter-selectable-list-item-sub-heading;
             }
 
-            span[highlighted] {
+            span {
                 background-color: yellow
             }
 
@@ -139,7 +140,7 @@ Example:
                 </div>
 
                 <div class="main-text-container">
-                    <heading id="heading">[[heading]]</heading>
+                    <heading id="heading"></heading>
                     <sub-heading> [[subHeading]] </sub-heading>
                     <slot class="bottom-slot" name="bottom"></slot>
                 </div>

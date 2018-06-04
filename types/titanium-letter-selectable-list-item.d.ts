@@ -1,3 +1,4 @@
+declare var Mark: any;
 declare const LetterSelectableListItem_base: typeof Polymer.Element & Polymer.DeclarativeEventListenersConstructor;
 declare class LetterSelectableListItem extends LetterSelectableListItem_base {
     item: any;
@@ -10,10 +11,8 @@ declare class LetterSelectableListItem extends LetterSelectableListItem_base {
     list: Object;
     disableSelection: boolean;
     searchTokens: Array<string>;
-    ready(): void;
+    headingElement: HTMLElement;
     onCardTap(e: any): void;
     toggleSelected(e: any): void;
-    regExpEscape(s: string): string;
-    headingChanged(searchTokens: Array<string>, heading: string): void;
-    private unique(a);
+    protected _onHeadingChanged(searchTokens: Array<string>, heading: string): void;
 }

@@ -27,7 +27,9 @@
     "paper-checkbox": "PolymerElements/paper-checkbox#^2.0.0",
     "titanium-circle-letter-icon": "^2.0.0",
     "neon-animation": "PolymerElements/neon-animation#^2.0.1",
-    "iron-flex-layout": "PolymerElements/iron-flex-layout#^2.0.0"
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#^2.0.0",
+    "mark.js": "^8.11.0",
+    "reflect-metadata": "rbuckton/reflect-metadata#^0.1.12"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
